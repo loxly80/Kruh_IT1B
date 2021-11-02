@@ -6,14 +6,14 @@ namespace Kruh_IT1B
     {
         static void Main(string[] args)
         {
-            int menuSelection;
+            ValueType menuSelection;
             double radius;
             double diameter;
             while (true)
             {
                 Console.Clear();
                 menuSelection = Menu();
-                if (menuSelection == 1)
+                if (menuSelection == ValueType.Radius)
                 {
                     radius = UserInputRadius();
                     Console.WriteLine(GetCircumference(radius, true));
@@ -29,13 +29,17 @@ namespace Kruh_IT1B
             }            
         }
 
-        static int Menu()
+        static ValueType Menu()
         {
             Console.WriteLine(" CIRCLE");
             Console.WriteLine("---------------");
             Console.WriteLine(" 1 - enter radius");
             Console.WriteLine(" 2 - enter diameter");
-            return int.Parse(Console.ReadLine());
+            var value = int.Parse(Console.ReadLine());
+            if (value == 1)
+                return ValueType.Radius;
+            else
+                return ValueType.Diameter;
         }
 
         static double UserInputRadius()
@@ -72,6 +76,12 @@ namespace Kruh_IT1B
             {
                 return $"S = {Math.Round(Math.PI * ((value * value) / 4), 2)}";
             }
+        }
+
+        enum ValueType
+        {
+            Radius,
+            Diameter
         }
     }
 }
